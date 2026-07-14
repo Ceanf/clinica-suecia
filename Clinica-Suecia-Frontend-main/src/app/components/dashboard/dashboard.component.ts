@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
     Chart.defaults.color = '#6c757d'; // Un gris elegante para los textos del gráfico
 
     // Llamamos al backend que preparamos en Java
-    this.http.get<any>('http://localhost:8080/api/dashboard/resumen').subscribe(res => {
+    this.http.get<any>('https://backend-clisuecia-production.up.railway.app/api/dashboard/resumen').subscribe(res => {
       
       // 1. Llenamos las tarjetas superiores
       this.kpis.totalPacientes = res.totalPacientes;

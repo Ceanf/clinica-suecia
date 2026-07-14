@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ConsultorioService {
 
-  private apiUrl = 'http://localhost:8080/api/consultorios'; // La URL de tu Chef en Java
+  private apiUrl = 'https://backend-clisuecia-production.up.railway.app/api/consultorios'; // La URL de tu Chef en Java
 
   constructor(private http: HttpClient) { }
 

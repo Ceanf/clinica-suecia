@@ -21,7 +21,7 @@ medicos: any[] = [];
 
   cargarEspecialidades() {
 
-    this.http.get<any[]>("http://localhost:8080/api/especialidades")
+    this.http.get<any[]>("https://backend-clisuecia-production.up.railway.app/api/especialidades")
       .subscribe({
 
         next: data => {
@@ -41,7 +41,7 @@ medicos: any[] = [];
   }
 cargarMedicos() {
 
-  this.http.get<any[]>("http://localhost:8080/api/medicos")
+  this.http.get<any[]>("https://backend-clisuecia-production.up.railway.app/api/medicos")
     .subscribe({
 
       next: data => {

@@ -54,13 +54,13 @@ export class CitaReservaComponent implements OnInit {
   cargarDatosMaestros() {
     const correoLogueado = localStorage.getItem('username');
 
-    this.http.get<any[]>('http://localhost:8080/api/usuarios').subscribe(usuarios => {
+    this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/usuarios').subscribe(usuarios => {
       const usuarioActual = usuarios.find(u => u.username === correoLogueado);
 
       // 🚨 ESCENARIO A: SI EL QUE INICIÓ SESIÓN ES PACIENTE (Rol 3)
       if (usuarioActual && usuarioActual.rolId === 3) {
         this.esPacienteLogueado = true;
-        this.http.get<any[]>('http://localhost:8080/api/pacientes').subscribe(pacientes => {
+        this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/pacientes').subscribe(pacientes => {
           const miPerfil = pacientes.find(p => p.usuarioId === usuarioActual.usuarioId);
           if (miPerfil) {
             // Autocompletamos su ID en el formulario y guardamos su nombre para la alerta azul
@@ -73,13 +73,13 @@ export class CitaReservaComponent implements OnInit {
       else {
         this.esPacienteLogueado = false;
         // Solo ellos necesitan descargar toda la lista de pacientes para el menú desplegable
-        this.http.get<any[]>('http://localhost:8080/api/pacientes').subscribe(data => {
+        this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/pacientes').subscribe(data => {
           this.listaPacientes = data;
         });
       }
 
       // 🚨 DATOS COMUNES: Esto se carga sin importar quién inició sesión
-      this.http.get<any[]>('http://localhost:8080/api/medicos').subscribe(data => this.todosLosMedicos = data);
+      this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/medicos').subscribe(data => this.todosLosMedicos = data);
       this.especialidadService.obtenerEspecialidades().subscribe(data => this.listaEspecialidades = data);
       this.consultorioService.listarConsultorios().subscribe(data => this.listaConsultorios = data);
     });

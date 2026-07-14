@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class EspecialidadService {
   
-  private apiUrl = 'http://localhost:8080/api/especialidades'; // La URL de tu backend
+  private apiUrl = 'https://backend-clisuecia-production.up.railway.app/api/especialidades'; // La URL de tu backend
 
   constructor(private http: HttpClient) { }
 

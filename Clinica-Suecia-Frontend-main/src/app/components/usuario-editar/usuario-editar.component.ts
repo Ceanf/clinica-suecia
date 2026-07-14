@@ -59,7 +59,7 @@ export class UsuarioEditarComponent implements OnInit {
 
   // 1. CONSULTAR LOS DATOS ACTUALES DEL USUARIO A TRAVÉS DE JAVA
   cargarUsuario() {
-    this.http.get(`http://localhost:8080/api/usuarios/${this.usuarioId}`).subscribe({
+    this.http.get(`https://backend-clisuecia-production.up.railway.app/api/usuarios/${this.usuarioId}`).subscribe({
       next: (res) => {
         this.usuario = res;
         // Reseteamos el campo password en el formulario por seguridad (el hash se queda a salvo en Java)
@@ -78,7 +78,7 @@ export class UsuarioEditarComponent implements OnInit {
     // Aseguramos que el ID viaje dentro del objeto
     this.usuario.usuarioId = this.usuarioId;
 
-    this.http.put(`http://localhost:8080/api/usuarios/${this.usuarioId}`, this.usuario, { responseType: 'text' }).subscribe({
+    this.http.put(`https://backend-clisuecia-production.up.railway.app/api/usuarios/${this.usuarioId}`, this.usuario, { responseType: 'text' }).subscribe({
       next: (res) => {
         this.mensaje = res; // "¡Usuario actualizado con éxito!"
         this.esError = false;

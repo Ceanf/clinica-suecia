@@ -42,19 +42,19 @@ enfermedadSeleccionada: number | null = null;
 
     this.cargarEnfermedades();
     // 1. Cargamos pacientes para el traductor
-    this.http.get<any[]>('http://localhost:8080/api/pacientes').subscribe(data => this.listaPacientes = data);
+    this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/pacientes').subscribe(data => this.listaPacientes = data);
 
     // 2. MAGIA DE SESIÓN: Obtenemos el correo logueado (Asegúrate de que 'username' sea la llave correcta en tu localStorage)
     const correoLogueado = localStorage.getItem('username');
 
     if (correoLogueado) {
       // 3. Buscamos el usuario asociado a ese correo
-      this.http.get<any[]>('http://localhost:8080/api/usuarios').subscribe(usuarios => {
+      this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/usuarios').subscribe(usuarios => {
         const usuario = usuarios.find(u => u.username === correoLogueado);
 
         if (usuario) {
           // 4. Buscamos el perfil de médico de ese usuario
-          this.http.get<any[]>('http://localhost:8080/api/medicos').subscribe(medicos => {
+          this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/medicos').subscribe(medicos => {
             const medico = medicos.find(m => m.usuarioId === usuario.usuarioId);
             
             if (medico) {
@@ -84,7 +84,7 @@ enfermedadSeleccionada: number | null = null;
   cargarEnfermedades() {
 
   this.http.get<any[]>(
-    'http://localhost:8080/api/catalogo/enfermedades'
+    'https://backend-clisuecia-production.up.railway.app/api/catalogo/enfermedades'
   ).subscribe({
 
     next: (data) => {
@@ -113,7 +113,7 @@ cargarTratamientos() {
   }
 
   this.http.get<any[]>(
-    `http://localhost:8080/api/catalogo/enfermedades/${this.enfermedadSeleccionada}/tratamientos`
+    `https://backend-clisuecia-production.up.railway.app/api/catalogo/enfermedades/${this.enfermedadSeleccionada}/tratamientos`
   ).subscribe({
 
     next: (data) => {
@@ -170,7 +170,7 @@ cargarTratamientos() {
     this.mensajeExito = '';
 
     // Traemos la ficha del paciente
-    this.http.get<any>(`http://localhost:8080/api/historial/paciente/${cita.pacienteId}`).subscribe(res => {
+    this.http.get<any>(`https://backend-clisuecia-production.up.railway.app/api/historial/paciente/${cita.pacienteId}`).subscribe(res => {
       this.historialBase = res;
     });
   }
@@ -215,7 +215,7 @@ cargarTratamientos() {
 
     // Actualizar historial clínico
     this.http.put(
-        `http://localhost:8080/api/historial/paciente/${this.citaEnAtencion.pacienteId}`,
+        `https://backend-clisuecia-production.up.railway.app/api/historial/paciente/${this.citaEnAtencion.pacienteId}`,
         this.historialBase
     ).subscribe({
         next: () => {

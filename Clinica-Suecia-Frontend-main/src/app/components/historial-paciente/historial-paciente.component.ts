@@ -20,18 +20,18 @@ export class HistorialPacienteComponent implements OnInit {
 
   ngOnInit(): void {
     // 1. Cargamos catálogos para traducir los IDs a nombres legibles
-    this.http.get<any[]>('http://localhost:8080/api/medicos').subscribe(data => this.listaMedicos = data);
-    this.http.get<any[]>('http://localhost:8080/api/consultorios').subscribe(data => this.listaConsultorios = data);
+    this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/medicos').subscribe(data => this.listaMedicos = data);
+    this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/consultorios').subscribe(data => this.listaConsultorios = data);
 
     // 2. Buscamos quién inició sesión
     const correoLogueado = localStorage.getItem('username');
 
     if (correoLogueado) {
-      this.http.get<any[]>('http://localhost:8080/api/usuarios').subscribe(usuarios => {
+      this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/usuarios').subscribe(usuarios => {
         const usuario = usuarios.find(u => u.username === correoLogueado);
 
         if (usuario) {
-          this.http.get<any[]>('http://localhost:8080/api/pacientes').subscribe(pacientes => {
+          this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/pacientes').subscribe(pacientes => {
             const paciente = pacientes.find(p => p.usuarioId === usuario.usuarioId);
             
             if (paciente) {
@@ -51,7 +51,7 @@ export class HistorialPacienteComponent implements OnInit {
     });
 
     // 2. 🚨 NUEVO: Traemos la ficha clínica permanente (Alergias, Sangre)
-    this.http.get<any>(`http://localhost:8080/api/historial/paciente/${pacienteId}`).subscribe(res => {
+    this.http.get<any>(`https://backend-clisuecia-production.up.railway.app/api/historial/paciente/${pacienteId}`).subscribe(res => {
       this.miFichaBase = res;
     });
   }

@@ -21,7 +21,7 @@ export class UsuarioListaComponent implements OnInit {
 
   // 1. LEER TODOS LOS USUARIOS DESDE JAVA
   cargarUsuarios() {
-    this.http.get<any[]>('http://localhost:8080/api/usuarios').subscribe({
+    this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/usuarios').subscribe({
       next: (res) => {
         this.usuarios = res;
       },
@@ -41,7 +41,7 @@ export class UsuarioListaComponent implements OnInit {
     const usuarioModificado = { ...usuario, activo: nuevoEstado };
 
     // Enviamos el cambio al método PUT del backend
-    this.http.put(`http://localhost:8080/api/usuarios/${usuario.usuarioId}`, usuarioModificado, { responseType: 'text' }).subscribe({
+    this.http.put(`https://backend-clisuecia-production.up.railway.app/api/usuarios/${usuario.usuarioId}`, usuarioModificado, { responseType: 'text' }).subscribe({
       next: (res) => {
         this.mensaje = `Estado de ${usuario.username} actualizado con éxito.`;
         this.esError = false;

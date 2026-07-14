@@ -27,9 +27,9 @@ export class CitaListaComponent implements OnInit {
 
   cargarDatos() {
     // 1. Descargamos los diccionarios (catálogos)
-    this.http.get<any[]>('http://localhost:8080/api/pacientes').subscribe(p => this.listaPacientes = p);
-    this.http.get<any[]>('http://localhost:8080/api/medicos').subscribe(m => this.listaMedicos = m);
-    this.http.get<any[]>('http://localhost:8080/api/consultorios').subscribe(c => this.listaConsultorios = c);
+    this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/pacientes').subscribe(p => this.listaPacientes = p);
+    this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/medicos').subscribe(m => this.listaMedicos = m);
+    this.http.get<any[]>('https://backend-clisuecia-production.up.railway.app/api/consultorios').subscribe(c => this.listaConsultorios = c);
 
     // 2. Descargamos las citas
     this.citaService.listarTodas().subscribe(data => {

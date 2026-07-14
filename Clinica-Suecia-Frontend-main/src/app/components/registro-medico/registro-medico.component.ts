@@ -44,8 +44,8 @@ export class RegistroMedicoComponent implements OnInit { // 🚨 3. Agregamos "i
 
   registrar() {
     const url = this.rolSeleccionado == 1 
-      ? 'http://localhost:8080/api/registrar' 
-      : 'http://localhost:8080/api/registrar-medico';
+      ? 'https://backend-clisuecia-production.up.railway.app/api/registrar' 
+      : 'https://backend-clisuecia-production.up.railway.app/api/registrar-medico';
 
     this.http.post(url, this.medico, { responseType: 'text' }).subscribe({
       next: (res) => {

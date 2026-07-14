@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CitaService {
 
-  private apiUrl = 'http://localhost:8080/api/citas';
+  private apiUrl = 'https://backend-clisuecia-production.up.railway.app/api/citas';
 
   constructor(private http: HttpClient) { }
 

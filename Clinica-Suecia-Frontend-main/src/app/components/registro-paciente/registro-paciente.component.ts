@@ -44,7 +44,7 @@ export class RegistroPacienteComponent implements OnInit {
   }
 
   cargarDatosPaciente() {
-    this.http.get(`http://localhost:8080/api/usuarios/${this.usuarioId}`).subscribe({
+    this.http.get(`https://backend-clisuecia-production.up.railway.app/api/usuarios/${this.usuarioId}`).subscribe({
       next: (res: any) => {
         this.paciente = res;
         // La contraseña no se descarga por seguridad, se inicializa vacía para el input opcional
@@ -60,7 +60,7 @@ export class RegistroPacienteComponent implements OnInit {
   guardar() {
     if (this.esEdicion) {
       // 📝 MODO EDICIÓN (Manda PUT al backend)
-      this.http.put(`http://localhost:8080/api/usuarios/${this.usuarioId}`, this.paciente, { responseType: 'text' }).subscribe({
+      this.http.put(`https://backend-clisuecia-production.up.railway.app/api/usuarios/${this.usuarioId}`, this.paciente, { responseType: 'text' }).subscribe({
         next: (res) => {
           this.mensaje = "¡Paciente actualizado con éxito!";
           this.esError = false;
@@ -73,7 +73,7 @@ export class RegistroPacienteComponent implements OnInit {
       });
     } else {
       // ➕ MODO REGISTRO ORIGINAL (Manda POST al backend)
-      this.http.post('http://localhost:8080/api/registrar-paciente', this.paciente, { responseType: 'text' }).subscribe({
+      this.http.post('https://backend-clisuecia-production.up.railway.app/api/registrar-paciente', this.paciente, { responseType: 'text' }).subscribe({
         next: (res) => {
           this.mensaje = "¡Cuenta creada con éxito! Redireccionando...";
           this.esError = false;
