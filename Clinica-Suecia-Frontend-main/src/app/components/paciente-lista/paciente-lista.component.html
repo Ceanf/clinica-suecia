@@ -1,0 +1,48 @@
+<div class="page-wrapper">
+  
+  <div class="header-container">
+    <h3 class="fw-bold text-dark mb-0">
+      <i class="fa-solid fa-hospital-user me-2"></i> Panel de Pacientes
+    </h3>
+    <a routerLink="/registro-paciente" class="btn-premium">
+      <i class="fa-solid fa-plus"></i> Nuevo Paciente
+    </a>
+  </div>
+
+  <div class="premium-card">
+    <div class="table-container">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>DNI</th>
+            <th>TELÉFONO</th>
+            <th>FEC. NAC.</th>
+            <th>USUARIO</th>
+            <th>ESTADO</th>
+            <th class="text-center">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of listaPacientes">
+            <td data-label="ID">#{{ p.usuarioId }}</td>
+            <td data-label="NOMBRE">{{ p.nombre }} {{ p.apellido }}</td>
+            <td data-label="DNI">{{ p.dni }}</td>
+            <td data-label="TELÉFONO">{{ p.telefono || 'N/A' }}</td>
+            <td data-label="FEC. NAC.">{{ p.fechaNacimiento | date:'dd/MM/yyyy' }}</td>
+            <td data-label="USUARIO" class="email-cell">{{ p.username }}</td>
+            <td data-label="ESTADO">
+              <span class="badge-custom" [ngClass]="p.activo ? 'bg-soft-success' : 'bg-soft-danger'">
+                {{ p.activo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+            <td data-label="ACCIONES" class="text-center">
+              <a [routerLink]="['/usuarios/editar-paciente', p.usuarioId]" class="btn-action btn-edit">Editar</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

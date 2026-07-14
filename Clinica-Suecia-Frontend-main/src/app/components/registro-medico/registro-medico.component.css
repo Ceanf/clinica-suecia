@@ -1,0 +1,67 @@
+/* Hereda .page-wrapper y .premium-card de tu CSS global o del componente anterior */
+
+.form-control-custom, .form-select-custom {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e1e9e7;
+  border-radius: 12px;
+  transition: all 0.3s;
+}
+
+.form-control-custom:focus, .form-select-custom:focus {
+  border-color: #1aa483;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(26, 164, 131, 0.1);
+}
+
+.bg-soft-teal { 
+  background-color: #f1f9f7; 
+}
+
+.text-emerald { color: #0a3d2e; }
+
+/* Botón Premium */
+.btn-premium {
+  background: linear-gradient(135deg, #1aa483 0%, #157a5f 100%);
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+@media (max-width: 992px) {
+  .page-wrapper {
+    margin-left: 0;
+    padding-bottom: 100px;
+  }
+}
+
+/* Asegura que el formulario sea fluido en celular */
+.premium-card {
+  width: 95%; /* Ocupa casi todo el ancho en móvil */
+  max-width: 500px; /* Pero no crece más de 500px en PC */
+  margin: 0 auto; /* Centrado automático */
+  padding: 20px;
+}
+
+/* Ajuste específico para el móvil */
+@media (max-width: 576px) {
+  .page-wrapper {
+    padding: 10px; /* Menos padding en móviles para ganar espacio */
+  }
+  
+  .premium-card {
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  h3 {
+    font-size: 1.25rem; /* Título un poco más pequeño en celular */
+  }
+}

@@ -1,0 +1,222 @@
+<div class="register-page">
+
+    <!-- Efectos del fondo -->
+    <div class="blur blur1"></div>
+    <div class="blur blur2"></div>
+
+    <!-- Botón volver -->
+    <a routerLink="/" class="btn-back">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+
+    <div class="register-card">
+
+        <!-- Logo -->
+
+        <div class="logo">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+        </div>
+
+        <h1>Crear Cuenta</h1>
+
+        <p class="subtitulo">
+
+            Registra tus datos para acceder a la plataforma médica de Clínica Suecia.
+
+        </p>
+
+        <form (ngSubmit)="guardar()">
+
+            <div class="row">
+
+                <!-- Nombre -->
+
+                <div class="col-md-6">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            type="text"
+                            name="nombre"
+                            [(ngModel)]="paciente.nombre"
+                            placeholder="Nombre"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Apellido -->
+
+                <div class="col-md-6">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-user-tag"></i>
+
+                        <input
+                            type="text"
+                            name="apellido"
+                            [(ngModel)]="paciente.apellido"
+                            placeholder="Apellido"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- DNI -->
+
+                <div class="col-md-6">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                        <input
+                            type="text"
+                            name="dni"
+                            [(ngModel)]="paciente.dni"
+                            [disabled]="esEdicion"
+                            placeholder="DNI"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Teléfono -->
+
+                <div class="col-md-6">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <input
+                            type="tel"
+                            name="telefono"
+                            [(ngModel)]="paciente.telefono"
+                            placeholder="Teléfono"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Fecha -->
+
+                <div class="col-md-6">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                        <input
+                            type="date"
+                            name="fechaNacimiento"
+                            [(ngModel)]="paciente.fechaNacimiento"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Correo -->
+
+                <div class="col-md-6">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            name="username"
+                            [(ngModel)]="paciente.username"
+                            placeholder="Correo electrónico"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Contraseña -->
+
+                <div class="col-md-6">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            name="password"
+                            [(ngModel)]="paciente.password"
+                            [required]="!esEdicion"
+                            [placeholder]="esEdicion ? 'Nueva contraseña (opcional)' : 'Contraseña'">
+
+                    </div>
+
+                </div>
+
+                <!-- Confirmar -->
+
+                <div class="col-md-6">
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <input
+                            type="password"
+                            placeholder="Confirmar contraseña">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn-register">
+
+                <i class="fa-solid fa-user-plus me-2"></i>
+
+                {{ esEdicion ? 'Guardar Cambios' : 'Crear Cuenta' }}
+
+            </button>
+
+        </form>
+
+        <div class="login-link">
+
+            <span>
+
+                ¿Ya tienes una cuenta?
+
+            </span>
+
+            <a routerLink="/login">
+
+                Iniciar sesión
+
+            </a>
+
+        </div>
+
+        <div
+            *ngIf="mensaje"
+            class="alert mt-4"
+            [ngClass]="esError ? 'alert-danger' : 'alert-success'">
+
+            {{mensaje}}
+
+        </div>
+
+    </div>
+
+</div>

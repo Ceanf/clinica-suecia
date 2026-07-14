@@ -1,0 +1,66 @@
+<div class="page-wrapper">
+  
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <h3 class="fw-bold text-dark mb-0">
+      <i class="fa-solid fa-users me-2"></i> Gestión de Usuarios
+    </h3>
+    <a routerLink="/registro-medico" class="btn-premium">
+      <i class="fa-solid fa-plus"></i> Alta de Personal
+    </a>
+  </div>
+
+  <div *ngIf="mensaje" [ngClass]="{'alert-danger': esError, 'alert-success': !esError}" class="alert text-center small py-2 rounded-pill border-0 shadow-sm">
+    {{ mensaje }}
+  </div>
+
+  <div class="premium-card">
+    <div class="table-responsive">
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Correo Electrónico</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of usuarios">
+            <td data-label="ID"><strong>#{{ user.usuarioId }}</strong></td>
+            
+            <td data-label="Correo" class="email-cell">{{ user.username }}</td>
+            
+            <td data-label="Rol">
+              <span class="badge-custom bg-soft-teal">
+                {{ obtenerNombreRol(user.rolId) }}
+              </span>
+            </td>
+            
+            <td data-label="Estado">
+              <span class="badge-custom" [ngClass]="user.activo ? 'bg-soft-success' : 'bg-soft-danger'">
+                <i class="fa-solid" [ngClass]="user.activo ? 'fa-check-circle' : 'fa-circle-xmark'"></i>
+                {{ user.activo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+            
+            <td data-label="Acciones" class="text-center">
+              <div class="action-buttons">
+                <button (click)="irAEditar(user.usuarioId)" class="btn-action btn-edit">
+                  <i class="fa-solid fa-pen"></i> Editar
+                </button>
+
+                <button (click)="alternarEstado(user)" 
+                        class="btn-action"
+                        [ngClass]="user.activo ? 'btn-delete' : 'btn-activate'">
+                  <i class="fa-solid" [ngClass]="user.activo ? 'fa-ban' : 'fa-check'"></i>
+                  {{ user.activo ? 'Baja' : 'Activar' }}
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

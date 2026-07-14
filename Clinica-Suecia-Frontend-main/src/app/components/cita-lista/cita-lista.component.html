@@ -1,0 +1,49 @@
+<div class="page-wrapper">
+  
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <h3 class="fw-bold text-dark mb-0">
+      <i class="fa-solid fa-calendar-check me-2"></i> Historial de Citas
+    </h3>
+    <a routerLink="/reservar-cita" class="btn-premium">
+      <i class="fa-solid fa-plus"></i> Agendar Nueva Cita
+    </a>
+  </div>
+
+  <div class="premium-card">
+    <div class="table-responsive">
+      <table class="table-custom text-center">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th><i class="fa-solid fa-clock me-1"></i> Fecha y Hora</th>
+            <th><i class="fa-solid fa-user-injured me-1"></i> Paciente</th>
+            <th><i class="fa-solid fa-user-doctor me-1"></i> Médico</th>
+            <th><i class="fa-solid fa-door-open me-1"></i> Consultorio</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of listaCitas">
+            <td data-label="ID"><strong>#{{ cita.citaId }}</strong></td>
+            <td data-label="Fecha">{{ cita.fechaHora | date:'dd/MM/yyyy, h:mm a' }}</td>
+            <td data-label="Paciente">{{ obtenerPaciente(cita.pacienteId) }}</td>
+            <td data-label="Médico">{{ obtenerMedico(cita.medicoId) }}</td>
+            <td data-label="Consultorio">{{ obtenerConsultorio(cita.consultorioId) }}</td>
+            <td data-label="Estado">
+              <span class="badge-custom" 
+                    [ngClass]="{'bg-soft-warning': cita.estado === 'Pendiente', 
+                                'bg-soft-success': cita.estado === 'Atendida', 
+                                'bg-soft-danger': cita.estado === 'Cancelada'}">
+                <i class="fa-solid" [ngClass]="{'fa-clock': cita.estado === 'Pendiente', 'fa-check': cita.estado === 'Atendida', 'fa-xmark': cita.estado === 'Cancelada'}"></i>
+                {{ cita.estado }}
+              </span>
+            </td>
+          </tr>
+          <tr *ngIf="listaCitas.length === 0">
+            <td colspan="6" class="text-center text-muted py-4">No hay citas registradas.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

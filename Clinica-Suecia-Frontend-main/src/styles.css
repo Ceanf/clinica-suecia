@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #eaf5f1; /* Verde menta claro de la imagen */
+  margin: 0;
+  padding: 0;
+}
+
+.decoracion-fondo {
+  position: fixed;
+  bottom: -20px;
+  right: -20px;
+  width: 400px; /* Ajusta el tamaño según tu imagen */
+  opacity: 0.4; /* 🚨 Lo hace medio transparente como marca de agua */
+  z-index: -1; /* Lo pone detrás de los gráficos por si se cruzan */
+  pointer-events: none; /* Evita que la imagen estorbe al hacer clic */
+}
+
+/* Esto asegura que la fuente Poppins domine todo y suaviza los textos */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f7f4; /* Fondo menta ultra-suave */
+  -webkit-font-smoothing: antialiased; /* Hace que las letras se vean súper nítidas */
+  color: #2c3e50; /* Un gris azulado oscuro es más elegante que el negro puro */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.5px; /* Junta un micro-milímetro las letras para toque moderno */
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+

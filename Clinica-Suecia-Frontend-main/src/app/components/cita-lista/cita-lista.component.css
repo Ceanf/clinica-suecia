@@ -1,0 +1,101 @@
+/* =========================================
+   ESTRUCTURA GENERAL
+   ========================================= */
+.page-wrapper {
+  margin-left: 260px;
+  padding: 30px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.premium-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   ESTILOS DE LA TABLA
+   ========================================= */
+.table-responsive { width: 100%; overflow-x: auto; }
+.table-custom { width: 100%; border-collapse: collapse; }
+
+.table-custom thead th { 
+  background: #f8f9fa; 
+  padding: 15px; 
+  text-transform: uppercase; 
+  font-size: 0.75rem; 
+  border-bottom: 2px solid #eef2f1; 
+  color: #157a5f;
+}
+
+.table-custom td { 
+  padding: 15px; 
+  border-bottom: 1px solid #f8f9fa; 
+  color: #333; 
+  font-size: 0.9rem; 
+}
+
+/* =========================================
+   BOTONES Y BADGES DE ESTADO
+   ========================================= */
+.btn-premium { 
+  background: linear-gradient(135deg, #1aa483 0%, #157a5f 100%); 
+  color: white; 
+  padding: 10px 20px; 
+  border-radius: 12px; 
+  text-decoration: none; 
+  font-weight: 600; 
+  transition: 0.3s;
+}
+
+.btn-premium:hover { filter: brightness(1.1); }
+
+.badge-custom { 
+  padding: 6px 12px; 
+  border-radius: 15px; 
+  font-size: 0.75rem; 
+  font-weight: bold; 
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bg-soft-warning { background: #fffbeb; color: #b45309; }
+.bg-soft-success { background: #ecfdf5; color: #065f46; }
+.bg-soft-danger { background: #fef2f2; color: #991b1b; }
+
+/* =========================================
+   RESPONSIVE (MÓVIL)
+   ========================================= */
+@media (max-width: 992px) {
+  .page-wrapper { margin-left: 0; padding: 15px; padding-bottom: 90px; }
+  
+  .table-custom thead { display: none; }
+  
+  .table-custom tbody tr { 
+    display: block; 
+    margin-bottom: 15px; 
+    background: white; 
+    border-radius: 12px; 
+    padding: 15px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+  }
+  
+  .table-custom td { 
+    display: flex; 
+    justify-content: space-between; 
+    padding: 8px 0; 
+    border-bottom: 1px dashed #eee; 
+  }
+  
+  .table-custom td::before { 
+    content: attr(data-label); 
+    font-weight: bold; 
+    color: #157a5f; 
+    text-transform: uppercase; 
+    font-size: 0.7rem; 
+  }
+}

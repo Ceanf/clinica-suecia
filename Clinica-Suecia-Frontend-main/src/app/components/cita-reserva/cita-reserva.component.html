@@ -1,0 +1,76 @@
+<div class="page-wrapper">
+  <div class="premium-card mx-auto" style="max-width: 800px;">
+    <h3 class="text-center fw-bold mb-4" style="color: #0a3d2e;">
+      <i class="fa-solid fa-calendar-plus me-2"></i> Reservar Nueva Cita
+    </h3>
+
+    <form (ngSubmit)="agendar()">
+      <h5 class="section-title"><i class="fa-solid fa-user-injured me-2"></i> 1. Datos del Paciente</h5>
+      <div class="mb-4" *ngIf="!esPacienteLogueado">
+        <label class="form-label fw-bold small">Seleccionar Paciente</label>
+        <select name="pacienteId" class="form-select-custom" [(ngModel)]="reserva.pacienteId" required>
+          <option [ngValue]="null" disabled>-- Elija un paciente --</option>
+          <option *ngFor="let p of listaPacientes" [ngValue]="p.pacienteId">
+            {{ p.nombre }} {{ p.apellido }} (DNI: {{ p.dni }})
+          </option>
+        </select>
+      </div>
+
+      <div class="mb-4" *ngIf="esPacienteLogueado">
+        <div class="info-box">
+          <i class="fa-solid fa-user-check me-2"></i> Reservando para: <strong>{{ nombrePacienteFijo }}</strong>
+        </div>
+      </div>
+
+      <h5 class="section-title"><i class="fa-solid fa-stethoscope me-2"></i> 2. Profesional y Consultorio</h5>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label fw-bold small">Especialidad</label>
+          <select name="especialidadId" class="form-select-custom" [(ngModel)]="reserva.especialidadId" (change)="alCambiarEspecialidad()" required>
+            <option [ngValue]="null" disabled>-- Especialidad --</option>
+            <option *ngFor="let e of listaEspecialidades" [value]="e.especialidadId">{{ e.nombre }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label fw-bold small">Médico</label>
+          <select name="medicoId" class="form-select-custom" [(ngModel)]="reserva.medicoId" [disabled]="!reserva.especialidadId" required>
+            <option [ngValue]="null" disabled>-- Médico --</option>
+            <option *ngFor="let m of medicosFiltrados" [ngValue]="m.medicoId">Dr(a). {{ m.apellido }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label fw-bold small">Consultorio</label>
+          <select name="consultorioId" class="form-select-custom" [(ngModel)]="reserva.consultorioId" required>
+            <option [ngValue]="null" disabled>-- Consultorio --</option>
+            <option *ngFor="let c of listaConsultorios" [ngValue]="c.consultorioId">{{ c.nombreSala }} (Piso {{ c.piso }})</option>
+          </select>
+        </div>
+      </div>
+
+      <h5 class="section-title"><i class="fa-solid fa-pen-to-square me-2"></i> 3. Fecha y Motivo</h5>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label fw-bold small">Fecha</label>
+          <input type="date" name="fecha" class="form-control-custom" [(ngModel)]="reserva.fecha" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label fw-bold small">Hora</label>
+          <input type="time" name="hora" class="form-control-custom" [(ngModel)]="reserva.hora" required>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-bold small">Motivo de Consulta</label>
+        <textarea name="motivoConsulta" class="form-control-custom" rows="3" [(ngModel)]="reserva.motivoConsulta" required></textarea>
+      </div>
+
+      <button type="submit" class="btn-premium w-100 py-3 fw-bold">
+        <i class="fa-solid fa-calendar-check me-2"></i> Confirmar y Bloquear Horario
+      </button>
+
+      <div *ngIf="mensaje" [ngClass]="{'alert-danger': esError, 'alert-success': !esError}" class="alert mt-3 text-center rounded-pill">
+        {{ mensaje }}
+      </div>
+    </form>
+  </div>
+</div>

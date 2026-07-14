@@ -1,0 +1,102 @@
+<div class="login-page">
+
+    <!-- Luces del fondo -->
+    <div class="blur blur1"></div>
+    <div class="blur blur2"></div>
+<!-- Botón volver -->
+    <a routerLink="/" class="btn-back">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+    <div class="login-card">
+      <div class="volver">
+
+    
+</div>
+
+        <!-- Logo -->
+
+        <div class="logo">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+        </div>
+
+        <h1>Clínica Suecia</h1>
+
+        <p class="subtitulo">
+
+            Plataforma médica inteligente para pacientes y profesionales.
+
+        </p>
+
+        
+
+        <form (ngSubmit)="onLogin()">
+
+            <!-- Correo -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <input
+                    type="email"
+                    name="username"
+                    [(ngModel)]="credentials.username"
+                    placeholder="Correo electrónico"
+                    required>
+
+            </div>
+
+            <!-- Contraseña -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    name="password"
+                    [(ngModel)]="credentials.password"
+                    placeholder="Contraseña"
+                    required>
+
+            </div>
+
+            <button type="submit">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                Iniciar Sesión
+
+            </button>
+
+        </form>
+
+        <div class="registro">
+
+            <span>
+
+                ¿Aún no tienes cuenta?
+
+            </span>
+
+            <a routerLink="/registro-paciente">
+
+                Crear cuenta
+
+            </a>
+
+        </div>
+
+        <div
+            *ngIf="mensaje"
+            class="alert alert-danger mt-4">
+
+            {{mensaje}}
+
+        </div>
+
+    </div>
+
+</div>

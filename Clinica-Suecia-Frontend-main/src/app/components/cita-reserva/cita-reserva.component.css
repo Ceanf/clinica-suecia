@@ -1,0 +1,23 @@
+.page-wrapper { margin-left: 260px; padding: 30px; background-color: #f8f9fa; min-height: 100vh; transition: all 0.3s ease; }
+.premium-card { background: white; border-radius: 25px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); }
+
+.section-title { color: #0a3d2e; margin-bottom: 1rem; border-bottom: 2px solid #e1e9e7; padding-bottom: 0.5rem; font-weight: 700; }
+.info-box { background: #e6f4f1; border-left: 4px solid #1aa483; padding: 15px; border-radius: 8px; color: #0a3d2e; }
+
+.form-control-custom, .form-select-custom {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e1e9e7;
+  border-radius: 12px;
+}
+
+.btn-premium {
+  background: linear-gradient(135deg, #1aa483 0%, #157a5f 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+}
+
+@media (max-width: 992px) {
+  .page-wrapper { margin-left: 0; padding: 15px; padding-bottom: 100px; }
+}

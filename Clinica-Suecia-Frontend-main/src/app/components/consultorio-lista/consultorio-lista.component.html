@@ -1,0 +1,84 @@
+<div class="page-wrapper">
+  
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <h3 class="fw-bold text-dark mb-0">
+      <i class="fa-solid fa-building me-2"></i> Gestión de Consultorios
+    </h3>
+    <button class="btn-premium" (click)="abrirNuevo()" *ngIf="!mostrarFormulario">
+      <i class="fa-solid fa-plus me-1"></i> Nuevo Consultorio
+    </button>
+  </div>
+
+  <div class="premium-card mb-4" *ngIf="mostrarFormulario">
+    <h5 class="fw-bold mb-4 text-emerald">
+      <i class="fa-solid" [ngClass]="modoEdicion ? 'fa-pen-to-square' : 'fa-door-open'"></i> 
+      {{ modoEdicion ? 'Editar Consultorio' : 'Registrar Nuevo Consultorio' }}
+    </h5>
+    
+    <form (ngSubmit)="guardar()">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label fw-bold small">Nombre de Sala</label>
+          <input type="text" name="nombreSala" class="form-control-custom" [(ngModel)]="consultorioActual.nombreSala" placeholder="Ej: Consultorio 101" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label fw-bold small">Piso</label>
+          <input type="number" name="piso" class="form-control-custom" [(ngModel)]="consultorioActual.piso" placeholder="Ej: 1" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label class="form-label fw-bold small">Tipo de Sala</label>
+          <select name="tipo" class="form-select-custom" [(ngModel)]="consultorioActual.tipo" required>
+            <option value="" disabled>-- Seleccione --</option>
+            <option value="General">General</option>
+            <option value="Pediatría">Pediatría</option>
+            <option value="Cirugía Menor">Cirugía Menor</option>
+            <option value="Tópico">Tópico</option>
+            <option value="Odontología">Odontología</option>
+            <option value="Consultorio">Consultorio</option>
+          </select>
+        </div>
+      </div>
+
+      <div *ngIf="mensaje" [ngClass]="{'alert-danger': esError, 'alert-success': !esError}" class="alert mt-2 text-center small py-2 rounded-pill border-0 shadow-sm">
+        {{ mensaje }}
+      </div>
+
+      <div class="d-flex justify-content-end gap-2 mt-3">
+        <button type="button" class="btn btn-outline-secondary px-4 fw-bold rounded-3" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn-premium"><i class="fa-solid fa-save me-1"></i> Guardar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="premium-card">
+    <div class="table-responsive">
+      <table class="table-custom text-center">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th><i class="fa-solid fa-door-closed me-1"></i> Nombre Sala</th>
+            <th><i class="fa-solid fa-layer-group me-1"></i> Piso</th>
+            <th><i class="fa-solid fa-tag me-1"></i> Tipo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="listaConsultorios.length === 0">
+            <td colspan="5" class="py-4 text-muted fw-bold">No hay consultorios registrados.</td>
+          </tr>
+          <tr *ngFor="let c of listaConsultorios">
+            <td data-label="ID"><strong>#{{ c.consultorioId }}</strong></td>
+            <td data-label="Nombre Sala">{{ c.nombreSala }}</td>
+            <td data-label="Piso">Piso {{ c.piso }}</td>
+            <td data-label="Tipo"><span class="badge-custom bg-soft-teal">{{ c.tipo }}</span></td>
+            <td data-label="Acciones">
+              <button class="btn-action btn-edit me-1" (click)="editar(c)"><i class="fa-solid fa-pen"></i></button>
+              <button class="btn-action btn-delete" (click)="eliminar(c.consultorioId)"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

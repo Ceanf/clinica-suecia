@@ -1,0 +1,131 @@
+/* =========================================
+   ESTRUCTURA GENERAL
+   ========================================= */
+.page-wrapper {
+  margin-left: 260px;
+  padding: 30px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.premium-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.text-emerald { color: #0a3d2e; }
+
+/* =========================================
+   FORMULARIOS
+   ========================================= */
+.form-control-custom, .form-select-custom {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #e1e9e7;
+  border-radius: 10px;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+.form-control-custom:focus, .form-select-custom:focus {
+  border-color: #1aa483;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(26, 164, 131, 0.1);
+}
+
+/* =========================================
+   TABLA
+   ========================================= */
+.table-responsive { width: 100%; overflow-x: auto; }
+.table-custom { width: 100%; border-collapse: collapse; }
+.table-custom thead th { 
+  background: #f8f9fa; 
+  padding: 15px; 
+  text-transform: uppercase; 
+  font-size: 0.75rem; 
+  border-bottom: 2px solid #eef2f1; 
+  color: #157a5f;
+}
+.table-custom td { 
+  padding: 15px; 
+  border-bottom: 1px solid #f8f9fa; 
+  color: #333; 
+  font-size: 0.9rem; 
+}
+
+/* =========================================
+   BOTONES Y BADGES
+   ========================================= */
+.btn-premium { 
+  background: linear-gradient(135deg, #1aa483 0%, #157a5f 100%); 
+  color: white; 
+  padding: 10px 20px; 
+  border-radius: 10px; 
+  border: none;
+  font-weight: 600; 
+  transition: 0.3s;
+}
+.btn-premium:hover { filter: brightness(1.1); }
+
+.btn-action { 
+  padding: 6px 12px; 
+  border-radius: 6px; 
+  border: none; 
+  font-size: 0.8rem; 
+  cursor: pointer; 
+}
+.btn-edit { background: #e0f2fe; color: #0369a1; }
+.btn-delete { background: #fee2e2; color: #991b1b; }
+
+.badge-custom { 
+  padding: 5px 12px; 
+  border-radius: 15px; 
+  font-size: 0.75rem; 
+  font-weight: bold; 
+}
+.bg-soft-teal { background: #e6f4f1; color: #157a5f; }
+
+/* =========================================
+   RESPONSIVE (MÓVIL)
+   ========================================= */
+@media (max-width: 992px) {
+  .page-wrapper { margin-left: 0; padding: 15px; padding-bottom: 90px; }
+  
+  .table-custom thead { display: none; }
+  
+  .table-custom tbody tr { 
+    display: block; 
+    margin-bottom: 15px; 
+    background: white; 
+    border-radius: 12px; 
+    padding: 15px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+  }
+  
+  .table-custom td { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 8px 0; 
+    border-bottom: 1px dashed #eee; 
+  }
+  
+  .table-custom td::before { 
+    content: attr(data-label); 
+    font-weight: bold; 
+    color: #157a5f; 
+    text-transform: uppercase; 
+    font-size: 0.7rem; 
+  }
+  
+  /* El contenedor de botones necesita alinearse a la derecha en celular */
+  .table-custom td[data-label="Acciones"] {
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  .table-custom td[data-label="Acciones"]::before {
+    display: none; /* Ocultamos la etiqueta "Acciones" en móvil para ahorrar espacio */
+  }
+}

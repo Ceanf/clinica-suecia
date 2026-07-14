@@ -1,0 +1,76 @@
+<div class="container mt-5">
+  <div class="card mx-auto shadow" style="max-width: 550px;">
+    <div class="card-body p-4">
+      <h3 class="card-title text-center mb-4 fw-bold">✏️ Editar Usuario #{{ usuarioId }}</h3>
+
+      <form (ngSubmit)="guardarCambios()">
+        <div class="mb-3">
+          <label class="form-label fw-bold">Correo Electrónico (Username)</label>
+          <input type="email" name="username" class="form-control" [(ngModel)]="usuario.username" required />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-bold">Nueva Contraseña</label>
+          <input type="password" name="password" class="form-control" [(ngModel)]="usuario.password" 
+                 placeholder="Dejar en blanco para no cambiarla" />
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label fw-bold">Rol del Sistema</label>
+          <select name="rolId" class="form-select" [(ngModel)]="usuario.rolId" [disabled]="true" required>
+            <option [ngValue]="1">Administrador</option>
+            <option [ngValue]="2">Médico</option>
+          </select>
+          <div *ngIf="usuario.rolId == 2" class="form-text text-danger">El rol de un personal médico no puede ser alterado.</div>
+        </div>
+
+        <div *ngIf="usuario.rolId == 2" class="border border-primary rounded p-3 bg-light mb-4">
+          <h5 class="text-primary fw-bold mb-3">🩺 Perfil Profesional</h5>
+          
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label small fw-bold">Nombre</label>
+              <input type="text" name="nombre" class="form-control" [(ngModel)]="usuario.nombre" required />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label small fw-bold">Apellido</label>
+              <input type="text" name="apellido" class="form-control" [(ngModel)]="usuario.apellido" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label small fw-bold">DNI (No editable)</label>
+              <input type="text" name="dni" class="form-control bg-white" [(ngModel)]="usuario.dni" disabled />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label small fw-bold">CMP (Colegiatura)</label>
+              <input type="text" name="cmp" class="form-control" [(ngModel)]="usuario.cmp" required />
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label small fw-bold">Especialidad Médica</label>
+            <select name="especialidadId" class="form-select" [(ngModel)]="usuario.especialidadId" required>
+              <option value="" disabled>-- Seleccione una especialidad --</option>
+              
+              <option *ngFor="let esp of listaEspecialidades" [ngValue]="esp.especialidadId">
+                {{ esp.nombre }}
+              </option>
+              
+            </select>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">💾 Guardar Cambios</button>
+          <a routerLink="/usuarios" class="btn btn-outline-secondary w-100 py-2 fw-bold">Cancelar</a>
+        </div>
+      </form>
+
+      <div *ngIf="mensaje" [ngClass]="{'alert-danger': esError, 'alert-success': !esError}" class="alert mt-3 text-center small py-2">
+        {{ mensaje }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="page-wrapper">
+  <div class="premium-card mx-auto" style="max-width: 600px;">
+    <h3 class="text-center fw-bold mb-4" style="color: #0a3d2e;">
+      <i class="fa-solid fa-user-plus me-2"></i> Alta de Personal
+    </h3>
+    
+    <form (ngSubmit)="registrar()">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <label class="form-label fw-bold">Nombre</label>
+          <input type="text" name="nombre" class="form-control-custom" [(ngModel)]="medico.nombre" required />
+        </div>
+        <div class="col-12 mb-3">
+          <label class="form-label fw-bold">Correo Electrónico</label>
+          <input type="email" name="username" class="form-control-custom" [(ngModel)]="medico.username" required />
+        </div>
+        <div class="col-12 mb-3">
+          <label class="form-label fw-bold">Contraseña</label>
+          <input type="password" name="password" class="form-control-custom" [(ngModel)]="medico.password" required />
+        </div>
+        <div class="col-12 mb-3">
+          <label class="form-label fw-bold">Asignar Rol</label>
+          <select name="rolId" class="form-select-custom" [(ngModel)]="rolSeleccionado" required>
+            <option [value]="1">Administrador</option>
+            <option [value]="2">Médico</option>
+          </select>
+        </div>
+      </div>
+
+      <div *ngIf="rolSeleccionado == 2" class="p-4 bg-soft-teal rounded-4 border-0 mb-4">
+        <h5 class="mb-3 text-emerald fw-bold"><i class="fa-solid fa-stethoscope"></i> Datos Médicos</h5>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label small">Apellido</label>
+            <input type="text" name="apellido" class="form-control-custom" [(ngModel)]="medico.apellido">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label small">DNI</label>
+            <input type="text" name="dni" class="form-control-custom" [(ngModel)]="medico.dni">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label small">CMP</label>
+          <input type="text" name="cmp" class="form-control-custom" [(ngModel)]="medico.cmp">
+        </div>
+        <div class="mb-0">
+          <label class="form-label small fw-bold">Especialidad</label>
+          <select name="especialidadId" class="form-select-custom" [(ngModel)]="medico.especialidadId" required>
+            <option value="" disabled selected>-- Seleccione --</option>
+            <option *ngFor="let esp of listaEspecialidades" [ngValue]="esp.especialidadId">
+              {{ esp.nombre }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-premium w-100 py-3">Registrar Personal</button>
+    </form>
+
+    <div *ngIf="mensaje" class="mt-3 text-center fw-bold alert" [ngClass]="esError ? 'text-danger' : 'text-success'">
+      {{ mensaje }}
+    </div>
+  </div>
+</div>

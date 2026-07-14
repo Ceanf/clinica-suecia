@@ -1,0 +1,20 @@
+.page-wrapper { margin-left: 260px; padding: 30px; min-height: 100vh; background-color: #f8f9fa; transition: all 0.3s ease; }
+.premium-card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+.text-emerald { color: #157a5f; }
+.border-emerald { border-color: #1aa483 !important; }
+.border-left-indicator { border-left: 5px solid; }
+
+.badge-custom { padding: 5px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; }
+.bg-soft-success { background: #ecfdf5; color: #065f46; }
+.bg-soft-warning { background: #fffbeb; color: #b45309; }
+.bg-soft-danger { background: #fef2f2; color: #991b1b; }
+
+.medic-list { background: #f9f9f9; padding: 10px; border-radius: 8px; }
+.medic-item { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.85rem; }
+
+.btn-premium { background: linear-gradient(135deg, #1aa483 0%, #157a5f 100%); color: white; padding: 10px 20px; border-radius: 12px; text-decoration: none; font-weight: 600; }
+
+@media (max-width: 992px) {
+  .page-wrapper { margin-left: 0; padding: 15px; padding-bottom: 90px; }
+}

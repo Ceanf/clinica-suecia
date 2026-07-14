@@ -1,0 +1,191 @@
+/* =========================================
+   ESTRUCTURA GENERAL (PC y Tablets grandes)
+   ========================================= */
+.page-wrapper {
+  margin-left: 280px; 
+  padding: 30px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  transition: margin-left 0.3s ease, padding 0.3s ease;
+}
+
+.premium-card {
+  background: white;
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+  width: 100%;
+}
+
+.btn-premium {
+  background: linear-gradient(135deg, #1aa483 0%, #157a5f 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(26, 164, 131, 0.3);
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26, 164, 131, 0.4);
+  color: white;
+}
+
+/* =========================================
+   ESTILOS DE LA TABLA (Versión Escritorio)
+   ========================================= */
+.table-custom {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-custom thead th {
+  background-color: #f1f5f4;
+  color: #0a3d2e;
+  padding: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  border-bottom: 2px solid #e1e9e7;
+}
+
+.table-custom tbody tr {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #f1f5f4;
+}
+
+.table-custom tbody tr:hover {
+  background-color: #fafdfc;
+}
+
+.table-custom td {
+  padding: 15px;
+  vertical-align: middle;
+  color: #4a5552;
+}
+
+/* Badges (Etiquetas) */
+.badge-custom {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bg-soft-teal { background-color: #e6f4f1; color: #157a5f; }
+.bg-soft-success { background-color: #e8f5e9; color: #2e7d32; }
+.bg-soft-danger { background-color: #ffebee; color: #c62828; }
+
+/* Botones de acción */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-action {
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-edit { background-color: #e3f2fd; color: #1565c0; }
+.btn-edit:hover { background-color: #bbdefb; }
+
+.btn-delete { background-color: #ffebee; color: #c62828; }
+.btn-delete:hover { background-color: #ffcdd2; }
+
+.btn-activate { background-color: #e8f5e9; color: #2e7d32; }
+.btn-activate:hover { background-color: #c8e6c9; }
+
+/* ========================================================= */
+/* 📱 DISEÑO EXCLUSIVO PARA CELULAR (App Móvil)              */
+/* ========================================================= */
+@media (max-width: 992px) {
+  
+  .page-wrapper {
+    margin-left: 0;
+    padding: 15px;
+    /* 🚨 100px de espacio abajo para que no choque con tu menú inferior */
+    padding-bottom: 100px; 
+  }
+
+  /* El contenedor blanco grande desaparece para dar paso a las tarjetas */
+  .premium-card {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* Escondemos la cabecera de la tabla */
+  .table-custom thead {
+    display: none;
+  }
+
+  /* Magia: Cada fila <tr> se vuelve una tarjeta de aplicación */
+  .table-custom tbody tr {
+    display: block;
+    background-color: white;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    padding: 20px;
+    border: none;
+  }
+
+  /* Cada celda <td> se pone en una línea nueva separada por una línea punteada */
+  .table-custom td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed #e1e9e7;
+    text-align: right;
+    font-size: 0.9rem;
+  }
+
+  /* La última celda (los botones) no lleva línea punteada y se centra */
+  .table-custom td:last-child {
+    border-bottom: none;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 0;
+  }
+
+  /* Títulos automáticos a la izquierda usando el data-label del HTML */
+  .table-custom td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #157a5f;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* Hacemos que los botones ocupen todo el ancho para que sea fácil tocarlos con el dedo */
+  .action-buttons {
+    width: 100%;
+    gap: 12px;
+  }
+  
+  .btn-action {
+    flex: 1; /* Mitad y mitad para Editar y Activar/Baja */
+    justify-content: center;
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+}

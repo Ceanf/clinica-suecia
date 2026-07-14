@@ -1,0 +1,107 @@
+.dashboard-wrapper {
+  margin-left: 280px; /* Ancho del menú (260px) + 20px de margen */
+  padding: 30px;
+  min-height: 100vh;
+  transition: margin-left 0.3s ease, padding 0.3s ease;
+}
+
+/* RESPONSIVE: Ajustes para tablets y celulares */
+@media (max-width: 992px) {
+  .dashboard-wrapper {
+    margin-left: 0; /* Quita el espacio del menú lateral */
+    padding: 15px;  /* Reduce el margen para aprovechar la pantalla */
+  }
+}
+
+/* Tarjetas superiores */
+.top-card {
+  border-radius: 20px;
+  padding: 25px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.top-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.card-value {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+/* RESPONSIVE: Ajuste de fuente y espaciado en tarjetas para móviles */
+@media (max-width: 768px) {
+  .top-card {
+    padding: 20px;
+  }
+  .card-value {
+    font-size: 2rem;
+  }
+}
+
+.card-icon {
+  font-size: 3rem;
+  opacity: 0.3;
+}
+
+/* Degradados inspirados en la imagen */
+.card-teal {
+  background: linear-gradient(135deg, #1aa483 0%, #126b56 100%);
+}
+
+.card-olive {
+  background: linear-gradient(135deg, #81b15c 0%, #4c7132 100%);
+}
+
+.card-purple {
+  background: linear-gradient(135deg, #5b62b1 0%, #353a73 100%);
+}
+
+/* Contenedores blancos redondeados para los gráficos */
+.chart-container {
+  background: white;
+  border-radius: 25px;
+  padding: 25px;
+  height: 100%;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+}
+
+.chart-header {
+  margin-bottom: 20px;
+}
+
+.chart-body {
+  height: 300px; /* Ajusta esto según el tamaño ideal de tus gráficos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* RESPONSIVE: Ajuste altura gráficos en móvil */
+@media (max-width: 768px) {
+  .chart-body {
+    height: 250px;
+  }
+}
+
+.decoracion-fondo {
+  position: fixed;
+  bottom: -20px;
+  right: -20px;
+  width: 400px; /* Ajusta el tamaño según tu imagen */
+  opacity: 0.4; /* 🚨 Lo hace medio transparente como marca de agua */
+  z-index: -1; /* Lo pone detrás de los gráficos por si se cruzan */
+  pointer-events: none; /* Evita que la imagen estorbe al hacer clic */
+}

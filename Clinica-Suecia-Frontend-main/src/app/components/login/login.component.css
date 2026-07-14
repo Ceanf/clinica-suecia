@@ -1,0 +1,783 @@
+/*=====================================================
+            LOGIN PREMIUM 2026
+======================================================*/
+
+:root{
+
+    --primary:#0F766E;
+
+    --primary-light:#14B8A6;
+
+    --secondary:#38BDF8;
+
+    --dark:#07131F;
+
+    --white:#FFFFFF;
+
+    --text:#0F172A;
+
+    --gray:#64748B;
+
+}
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+/*=====================================================
+                FONDO
+======================================================*/
+
+.login-page{
+
+    position:relative;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        135deg,
+        #07131F 0%,
+        #0E2A3D 30%,
+        #0F766E 100%
+    );
+
+}
+
+/*=====================================================
+            EFECTOS DE LUZ
+======================================================*/
+
+.blur{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(130px);
+
+}
+
+.blur1{
+
+    width:420px;
+
+    height:420px;
+
+    background:#14B8A655;
+
+    top:-120px;
+
+    left:-120px;
+
+}
+
+.blur2{
+
+    width:420px;
+
+    height:420px;
+
+    background:#38BDF855;
+
+    right:-120px;
+
+    bottom:-120px;
+
+}
+
+/*=====================================================
+                TARJETA
+======================================================*/
+
+.login-card{
+
+    position:relative;
+
+    z-index:10;
+
+    width:430px;
+
+    max-width:92%;
+
+    padding:55px;
+
+    border-radius:32px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(25px);
+
+    -webkit-backdrop-filter:blur(25px);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    box-shadow:
+
+    0 30px 70px rgba(0,0,0,.35);
+
+}
+
+/*=====================================================
+LOGO
+======================================================*/
+
+.logo{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    margin-bottom:25px;
+
+    border-radius:50%;
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #14B8A6,
+
+        #38BDF8
+
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:38px;
+
+    box-shadow:
+
+    0 20px 40px rgba(20,184,166,.40);
+
+}
+
+.login-card h1{
+
+    text-align:center;
+
+    color:white;
+
+    font-size:42px;
+
+    font-weight:800;
+
+    margin-bottom:12px;
+
+}
+
+.subtitulo{
+
+    text-align:center;
+
+    color:#D8E8F1;
+
+    line-height:1.8;
+
+    margin-bottom:40px;
+
+}
+/*=====================================================
+                INPUTS PREMIUM
+======================================================*/
+
+.input-box{
+
+    width:100%;
+
+    height:60px;
+
+    margin-bottom:22px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 22px;
+
+    transition:.35s;
+
+}
+
+.input-box:hover{
+
+    border-color:#14B8A6;
+
+}
+
+.input-box:focus-within{
+
+    border-color:#38BDF8;
+
+    background:rgba(255,255,255,.12);
+
+    box-shadow:
+
+    0 0 0 4px rgba(56,189,248,.15);
+
+}
+
+.input-box i{
+
+    color:#A7F3D0;
+
+    font-size:18px;
+
+    margin-right:16px;
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:500;
+
+}
+
+.input-box input::placeholder{
+
+    color:#CBD5E1;
+
+}
+
+/*=====================================================
+BOTÓN
+======================================================*/
+
+.login-card button{
+
+    width:100%;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+        135deg,
+        #14B8A6,
+        #38BDF8
+    );
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    margin-top:10px;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.login-card button i{
+
+    margin-right:10px;
+
+}
+
+.login-card button::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:70px;
+
+    height:220px;
+
+    background:rgba(255,255,255,.35);
+
+    top:-70px;
+
+    left:-90px;
+
+    transform:rotate(25deg);
+
+    transition:.8s;
+
+}
+
+.login-card button:hover::before{
+
+    left:120%;
+
+}
+
+.login-card button:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+
+    0 20px 45px rgba(20,184,166,.35);
+
+}
+
+/*=====================================================
+REGISTRO
+======================================================*/
+
+.registro{
+
+    margin-top:30px;
+
+    text-align:center;
+
+}
+
+.registro span{
+
+    display:block;
+
+    color:#CBD5E1;
+
+    margin-bottom:10px;
+
+}
+
+.registro a{
+
+    color:#A7F3D0;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+.registro a:hover{
+
+    color:white;
+
+}
+
+/*=====================================================
+ALERTA
+======================================================*/
+
+.alert{
+
+    border:none;
+
+    border-radius:15px;
+
+    text-align:center;
+
+}
+
+/*=====================================================
+ANIMACIONES
+======================================================*/
+
+.login-card{
+
+    animation:fadeUp .9s ease;
+
+}
+
+.logo{
+
+    animation:floatLogo 4s ease-in-out infinite;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(45px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes floatLogo{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=====================================================
+RESPONSIVE
+======================================================*/
+
+@media(max-width:768px){
+
+.login-card{
+
+padding:35px 25px;
+
+width:95%;
+
+}
+
+.login-card h1{
+
+font-size:32px;
+
+}
+
+.subtitulo{
+
+font-size:15px;
+
+}
+
+.logo{
+
+width:75px;
+
+height:75px;
+
+font-size:30px;
+
+}
+
+.input-box{
+
+height:55px;
+
+}
+
+.login-card button{
+
+height:55px;
+
+}
+
+}
+
+/*=====================================================
+        PREMIUM FINISH
+======================================================*/
+
+/*==================================
+Borde brillante
+===================================*/
+
+.login-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:32px;
+
+    padding:1px;
+
+    background:linear-gradient(
+
+        135deg,
+
+        rgba(255,255,255,.45),
+
+        rgba(255,255,255,.02)
+
+    );
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+            mask-composite:exclude;
+
+    pointer-events:none;
+
+}
+
+/*==================================
+Sombra elegante
+===================================*/
+
+.login-card:hover{
+
+    transform:translateY(-8px);
+
+    transition:.45s;
+
+    box-shadow:
+
+    0 40px 80px rgba(0,0,0,.40);
+
+}
+
+/*==================================
+Título degradado
+===================================*/
+
+.login-card h1{
+
+    background:linear-gradient(
+
+        90deg,
+
+        white,
+
+        #A7F3D0,
+
+        white
+
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+/*==================================
+Placeholder
+===================================*/
+
+.input-box input::placeholder{
+
+    transition:.35s;
+
+}
+
+.input-box input:focus::placeholder{
+
+    opacity:.4;
+
+}
+
+/*==================================
+Glass extra
+===================================*/
+
+.login-card{
+
+    backdrop-filter:blur(30px);
+
+    -webkit-backdrop-filter:blur(30px);
+
+}
+
+/*==================================
+Animación de entrada
+===================================*/
+
+@keyframes zoomIn{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.92);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+.login-card{
+
+    animation:zoomIn .8s ease;
+
+}
+
+/*==================================
+Logo brillante
+===================================*/
+
+.logo{
+
+    position:relative;
+
+}
+
+.logo::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:120%;
+
+    height:120%;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.15);
+
+    animation:pulse 3s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+        opacity:.5;
+
+    }
+
+    70%{
+
+        transform:scale(1.35);
+
+        opacity:0;
+
+    }
+
+    100%{
+
+        opacity:0;
+
+    }
+
+}
+
+/*==================================
+Seleccionar texto
+===================================*/
+
+::selection{
+
+    background:#14B8A6;
+
+    color:white;
+
+}
+.btn-back{
+
+    position:absolute;
+
+    top:30px;
+
+    left:30px;
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:20px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(15px);
+
+    transition:.35s;
+
+    z-index:20;
+
+}
+
+.btn-back:hover{
+
+    color:white;
+
+    background:#14B8A6;
+
+    transform:translateX(-5px);
+
+}

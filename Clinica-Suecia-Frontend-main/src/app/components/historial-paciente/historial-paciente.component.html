@@ -1,0 +1,65 @@
+<div class="page-wrapper">
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <h3 class="fw-bold text-dark mb-0">
+      <i class="fa-solid fa-file-medical me-2"></i> Mi Historial Clínico
+    </h3>
+    <a routerLink="/reservar-cita" class="btn-premium">
+      <i class="fa-solid fa-calendar-plus me-2"></i> Agendar Nueva Cita
+    </a>
+  </div>
+
+  <div class="premium-card mb-4 border-start border-4 border-emerald">
+    <h5 class="fw-bold mb-4"><i class="fa-solid fa-user-shield me-2"></i> Información Clínica</h5>
+    <div class="row text-center">
+      <div class="col-md-4 border-end">
+        <h6 class="small text-muted text-uppercase fw-bold">Grupo Sanguíneo</h6>
+        <span class="fs-4 fw-bold text-danger">{{ miFichaBase?.grupoSanguineo || 'N/A' }}</span>
+      </div>
+      <div class="col-md-4 border-end">
+        <h6 class="small text-muted text-uppercase fw-bold">Alergias</h6>
+        <span class="text-dark">{{ miFichaBase?.alergias || 'Ninguna' }}</span>
+      </div>
+      <div class="col-md-4">
+        <h6 class="small text-muted text-uppercase fw-bold">Antecedentes</h6>
+        <span class="text-dark">{{ miFichaBase?.antecedentesFamiliares || 'Ninguno' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="misCitas.length === 0" class="premium-card text-center text-muted">
+    <i class="fa-solid fa-notes-medical fs-2 mb-2"></i>
+    <p>Aún no tienes citas registradas en tu historial.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 mb-4" *ngFor="let cita of misCitas">
+      <div class="premium-card h-100 position-relative border-left-indicator" 
+           [ngClass]="{'border-success': cita.estado === 'Atendida', 'border-warning': cita.estado === 'Pendiente', 'border-danger': cita.estado === 'Cancelada'}">
+        
+        <div class="d-flex justify-content-between mb-3">
+          <span class="badge-custom" [ngClass]="{'bg-soft-success': cita.estado === 'Atendida', 'bg-soft-warning': cita.estado === 'Pendiente', 'bg-soft-danger': cita.estado === 'Cancelada'}">
+            {{ cita.estado }}
+          </span>
+          <span class="text-muted small fw-bold">{{ cita.fechaHora | date:'dd MMM yyyy, h:mm a' }}</span>
+        </div>
+
+        <h5 class="fw-bold">{{ obtenerMedico(cita.medicoId) }}</h5>
+        <p class="text-muted small mb-2"><i class="fa-solid fa-location-dot me-1"></i> {{ obtenerConsultorio(cita.consultorioId) }}</p>
+        <p class="small bg-light p-2 rounded"><strong>Motivo:</strong> {{ cita.motivoConsulta }}</p>
+
+        <div *ngIf="cita.estado === 'Atendida'" class="mt-3 pt-3 border-top">
+          <h6 class="text-emerald fw-bold small"><i class="fa-solid fa-stethoscope me-1"></i> Diagnóstico</h6>
+          <p class="small mb-3">{{ cita.diagnostico }}</p>
+
+          <h6 class="text-emerald fw-bold small"><i class="fa-solid fa-pills me-1"></i> Recetas</h6>
+          <div class="medic-list" *ngIf="cita.recetas?.length > 0; else sinRecetas">
+            <div *ngFor="let m of cita.recetas" class="medic-item">
+              <strong>{{ m.medicamento }}</strong> - <span class="badge bg-light text-dark">{{ m.dosis }}</span>
+            </div>
+          </div>
+          <ng-template #sinRecetas><p class="small text-muted">Sin medicamentos.</p></ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

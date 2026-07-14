@@ -1,0 +1,78 @@
+<button class="btn-hamburguesa" (click)="menuAbierto = true" *ngIf="isLoggedIn()">
+  <i class="fa-solid fa-bars"></i>
+</button>
+
+<div class="overlay" *ngIf="menuAbierto" (click)="menuAbierto = false"></div>
+
+<nav class="sidebar" [class.active]="menuAbierto" [class.colapsado]="sidebarColapsado" *ngIf="isLoggedIn()">
+  
+  <button class="btn-toggle-pc" (click)="sidebarColapsado = !sidebarColapsado">
+    <i class="fa-solid" [ngClass]="sidebarColapsado ? 'fa-chevron-right' : 'fa-chevron-left'"></i>
+  </button>
+
+  <button class="btn-cerrar" (click)="menuAbierto = false">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <div class="user-profile">
+    <div class="avatar-container">
+      <i class="fa-solid" 
+         [ngClass]="{'fa-user-tie': getRol() === 'ADMIN', 'fa-user-doctor': getRol() === 'MEDICO', 'fa-user': getRol() === 'PACIENTE'}"></i>
+    </div>
+    <h5 class="user-name">{{ getUsername() }}</h5>
+    <p class="user-role">{{ getRol() || 'Clínica Suecia' }}</p>
+  </div>
+
+  <ul class="nav-links">
+    
+    <li *ngIf="getRol() === 'ADMIN'">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" (click)="menuAbierto = false">
+        <i class="fa-solid fa-chart-pie"></i> <span class="nav-text">Dashboard</span>
+      </a>
+    </li>
+    <li *ngIf="getRol() === 'ADMIN'">
+      <a routerLink="/registro-medico" routerLinkActive="active" class="nav-item" (click)="menuAbierto = false">
+        <i class="fa-solid fa-stethoscope"></i> <span class="nav-text">Personal</span>
+      </a>
+    </li>
+    <li *ngIf="getRol() === 'ADMIN'">
+      <a routerLink="/usuarios" routerLinkActive="active" class="nav-item" (click)="menuAbierto = false">
+        <i class="fa-solid fa-users-gear"></i> <span class="nav-text">Lista de Usuarios</span>
+      </a>
+    </li>
+    <li *ngIf="getRol() === 'ADMIN'">
+      <a routerLink="/pacientes" routerLinkActive="active" class="nav-item" (click)="menuAbierto = false">
+        <i class="fa-solid fa-hospital-user"></i> <span class="nav-text">Pacientes</span>
+      </a>
+    </li>
+    <li *ngIf="getRol() === 'ADMIN'">
+      <a routerLink="/consultorios" routerLinkActive="active" class="nav-item" (click)="menuAbierto = false">
+        <i class="fa-solid fa-door-open"></i> <span class="nav-text">Consultorios</span>
+      </a>
+    </li>
+
+    <li *ngIf="getRol() === 'ADMIN' || getRol() === 'MEDICO'">
+      <a routerLink="/citas" routerLinkActive="active" class="nav-item" (click)="menuAbierto = false">
+        <i class="fa-solid fa-calendar-check"></i> <span class="nav-text">Citas</span>
+      </a>
+    </li>
+
+    <li *ngIf="getRol() === 'MEDICO'">
+      <a routerLink="/agenda-medico" routerLinkActive="active" class="nav-item" (click)="menuAbierto = false">
+        <i class="fa-solid fa-clipboard-list"></i> <span class="nav-text">Agenda</span>
+      </a>
+    </li>
+
+    <li *ngIf="getRol() === 'PACIENTE'">
+      <a routerLink="/mi-historial" routerLinkActive="active" class="nav-item" (click)="menuAbierto = false">
+        <i class="fa-solid fa-notes-medical"></i> <span class="nav-text">Mi Historial</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="logout-container">
+    <button (click)="logout(); menuAbierto = false" class="btn-logout">
+      <i class="fa-solid fa-right-from-bracket"></i> <span class="nav-text">Cerrar Sesión</span>
+    </button>
+  </div>
+</nav>
