@@ -38,6 +38,36 @@ export class CitaReservaComponent implements OnInit {
   esPacienteLogueado: boolean = false;
   nombrePacienteFijo: string = '';
 
+  // ===================================
+// RESTRICCIONES DE LA CLÍNICA
+// ===================================
+
+// No permite seleccionar días anteriores
+fechaMinima: string = "";
+
+// Horarios permitidos (cada 30 minutos)
+horariosDisponibles: string[] = [
+  "08:00",
+  "08:30",
+  "09:00",
+  "09:30",
+  "10:00",
+  "10:30",
+  "11:00",
+  "11:30",
+  "12:00",
+  "12:30",
+  "13:00",
+  "13:30",
+  "14:00",
+  "14:30",
+  "15:00",
+  "15:30",
+  "16:00",
+  "16:30",
+  "17:00"
+];
+
   constructor(
     private http: HttpClient,
     private citaService: CitaService,
@@ -47,8 +77,13 @@ export class CitaReservaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cargarDatosMaestros();
-  }
+
+  this.cargarDatosMaestros();
+
+  // Fecha mínima = hoy
+  this.fechaMinima = new Date().toISOString().split('T')[0];
+
+}
 
   // 3. CARGAMOS DATOS SEGÚN EL ROL (El componente camaleón)
   cargarDatosMaestros() {
@@ -95,41 +130,158 @@ export class CitaReservaComponent implements OnInit {
   }
 
   // 5. ENVIAR A JAVA
-  agendar() {
-    // Validamos que haya seleccionado fecha y hora
-    if (!this.reserva.fecha || !this.reserva.hora) {
-      this.mensaje = "Debe seleccionar una fecha y una hora.";
+ agendar() {
+
+  // ===================================
+  // VALIDAR FECHA Y HORA
+  // ===================================
+
+  if (!this.reserva.fecha || !this.reserva.hora) {
+
+    this.mensaje = "Debe seleccionar una fecha y una hora.";
+
+    this.esError = true;
+
+    return;
+
+  }
+
+  // Fecha seleccionada
+
+  const fechaSeleccionada = new Date(this.reserva.fecha);
+
+  // Día de la semana
+
+  const dia = fechaSeleccionada.getDay();
+
+  // ===================================
+  // NO SÁBADOS NI DOMINGOS
+  // ===================================
+
+  if (dia === 0 || dia === 6) {
+
+    this.mensaje =
+      "La Clínica Suecia atiende únicamente de lunes a viernes.";
+
+    this.esError = true;
+
+    return;
+
+  }
+
+  // ===================================
+  // SI ES HOY, VALIDAR HORA
+  // ===================================
+
+  const hoy = new Date();
+
+  const fechaHoy = hoy.toISOString().split("T")[0];
+
+  if (this.reserva.fecha === fechaHoy) {
+
+    const horaActual =
+      hoy.getHours() * 60 + hoy.getMinutes();
+
+    const partes = this.reserva.hora.split(":");
+
+    const horaReserva =
+      Number(partes[0]) * 60 +
+      Number(partes[1]);
+
+    if (horaReserva <= horaActual) {
+
+      this.mensaje =
+        "No puede reservar una cita en una hora que ya pasó.";
+
       this.esError = true;
+
       return;
+
     }
 
-    // Unimos la fecha y la hora con una "T" para crear un LocalDateTime compatible con Java
-    const fechaHoraFormateada = `${this.reserva.fecha}T${this.reserva.hora}:00`;
-
-    // Armamos el paquete final idéntico al RegistroCitaDTO de Java
-    const paqueteFinal = {
-      pacienteId: this.reserva.pacienteId,
-      medicoId: this.reserva.medicoId,
-      consultorioId: this.reserva.consultorioId,
-      fechaHora: fechaHoraFormateada,
-      motivoConsulta: this.reserva.motivoConsulta
-    };
-
-    // Mandamos el paquete a Java
-    this.citaService.agendarCita(paqueteFinal).subscribe({
-      next: () => {
-        this.mensaje = "¡Cita reservada con éxito! El sistema ha bloqueado este horario.";
-        this.esError = false;
-        
-        setTimeout(() => {
-          this.router.navigate(['/']); // Redirigimos al inicio después de 2.5 segundos
-        }, 2500);
-      },
-      error: (err) => {
-        // Atrapamos la alerta roja si Java detecta un choque de horarios (Regla de 30 minutos)
-        this.mensaje = err.error || "Error al intentar agendar la cita.";
-        this.esError = true;
-      }
-    });
   }
+
+  // ===================================
+  // HORARIO DE LA CLÍNICA
+  // ===================================
+
+  const partes = this.reserva.hora.split(":");
+
+  const hora = Number(partes[0]);
+
+  const minuto = Number(partes[1]);
+
+  if (
+
+      hora < 8 ||
+
+      hora > 17 ||
+
+      (hora === 17 && minuto > 0)
+
+  ) {
+
+      this.mensaje =
+        "La Clínica Suecia atiende únicamente entre las 08:00 AM y las 05:00 PM.";
+
+      this.esError = true;
+
+      return;
+
+  }
+
+  // ===================================
+  // FORMATEAR FECHA
+  // ===================================
+
+  const fechaHoraFormateada =
+    `${this.reserva.fecha}T${this.reserva.hora}:00`;
+
+  const paqueteFinal = {
+
+    pacienteId: this.reserva.pacienteId,
+
+    medicoId: this.reserva.medicoId,
+
+    consultorioId: this.reserva.consultorioId,
+
+    fechaHora: fechaHoraFormateada,
+
+    motivoConsulta: this.reserva.motivoConsulta
+
+  };
+
+  // ===================================
+  // ENVIAR
+  // ===================================
+
+  this.citaService.agendarCita(paqueteFinal).subscribe({
+
+    next: () => {
+
+      this.mensaje =
+        "¡Cita reservada correctamente!";
+
+      this.esError = false;
+
+      setTimeout(() => {
+
+        this.router.navigate(['/']);
+
+      }, 2500);
+
+    },
+
+    error: (err) => {
+
+      this.mensaje =
+        err.error || "Error al reservar la cita.";
+
+      this.esError = true;
+
+    }
+
+  });
+
+}
 }
