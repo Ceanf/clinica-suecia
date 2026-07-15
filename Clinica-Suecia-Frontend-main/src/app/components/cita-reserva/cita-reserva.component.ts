@@ -785,7 +785,24 @@ cerrarModal() {
 
     this.mostrarModal = false;
 
-    this.router.navigate(['/']);
+    const rol = Number(localStorage.getItem('rol'));
+
+    if (rol === 3) {
+
+        // Paciente
+        this.router.navigate(['/mi-historial']);
+
+    } else if (rol === 2) {
+
+        // Médico
+        this.router.navigate(['/agenda-medico']);
+
+    } else {
+
+        // Administrador
+        this.router.navigate(['/dashboard']);
+
+    }
 
 }
 }
