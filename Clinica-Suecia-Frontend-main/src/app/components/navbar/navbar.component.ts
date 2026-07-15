@@ -36,22 +36,17 @@ export class NavbarComponent {
 
   }
 
-  // NUEVO MÉTODO
   esPaginaPublica(): boolean {
 
-    const ruta = this.router.url;
+  console.log("Ruta actual:", this.router.url);
 
-    return (
+  return (
+    this.router.url === '/' ||
+    this.router.url === '/login' ||
+    this.router.url === '/registro-paciente'
+  );
 
-      ruta === '/' ||
-
-      ruta === '/login' ||
-
-      ruta === '/registro-paciente'
-
-    );
-
-  }
+}
 
   logout() {
 
