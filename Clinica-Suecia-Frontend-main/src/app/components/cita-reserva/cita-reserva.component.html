@@ -1,3 +1,5 @@
+
+
 <div class="page-wrapper">
   <div class="premium-card mx-auto" style="max-width: 800px;">
     <h3 class="text-center fw-bold mb-4" style="color: #0a3d2e;">
@@ -26,14 +28,16 @@
       <div class="row">
         <div class="col-md-4 mb-3">
           <label class="form-label fw-bold small">Especialidad</label>
-          <select name="especialidadId" class="form-select-custom" [(ngModel)]="reserva.especialidadId" (change)="alCambiarEspecialidad()" required>
+          <select name="especialidadId" class="form-select-custom" [(ngModel)]="reserva.especialidadId"
+            (change)="alCambiarEspecialidad()" required>
             <option [ngValue]="null" disabled>-- Especialidad --</option>
             <option *ngFor="let e of listaEspecialidades" [value]="e.especialidadId">{{ e.nombre }}</option>
           </select>
         </div>
         <div class="col-md-4 mb-3">
           <label class="form-label fw-bold small">Médico</label>
-          <select name="medicoId" class="form-select-custom" [(ngModel)]="reserva.medicoId" [disabled]="!reserva.especialidadId" required>
+          <select name="medicoId" class="form-select-custom" [(ngModel)]="reserva.medicoId"
+            [disabled]="!reserva.especialidadId" required>
             <option [ngValue]="null" disabled>-- Médico --</option>
             <option *ngFor="let m of medicosFiltrados" [ngValue]="m.medicoId">Dr(a). {{ m.apellido }}</option>
           </select>
@@ -42,7 +46,8 @@
           <label class="form-label fw-bold small">Consultorio</label>
           <select name="consultorioId" class="form-select-custom" [(ngModel)]="reserva.consultorioId" required>
             <option [ngValue]="null" disabled>-- Consultorio --</option>
-            <option *ngFor="let c of listaConsultorios" [ngValue]="c.consultorioId">{{ c.nombreSala }} (Piso {{ c.piso }})</option>
+            <option *ngFor="let c of listaConsultorios" [ngValue]="c.consultorioId">{{ c.nombreSala }} (Piso {{ c.piso
+              }})</option>
           </select>
         </div>
       </div>
@@ -50,88 +55,79 @@
       <h5 class="section-title"><i class="fa-solid fa-pen-to-square me-2"></i> 3. Fecha y Motivo</h5>
       <div class="row">
 
-  <!-- FECHA -->
+        <!-- FECHA -->
 
-  <div class="col-md-6 mb-3">
+        <div class="col-md-6 mb-3">
 
-    <label class="form-label fw-bold small">
+          <label class="form-label fw-bold small">
 
-      <i class="fa-solid fa-calendar-days me-2"></i>
+            <i class="fa-solid fa-calendar-days me-2"></i>
 
-      Fecha
+            Fecha
 
-    </label>
+          </label>
 
-    <input
-      type="date"
-      class="form-control-custom"
-      name="fecha"
-      [(ngModel)]="reserva.fecha"
-      [min]="fechaMinima"
-      required>
+          <input type="date" class="form-control-custom" name="fecha" [(ngModel)]="reserva.fecha" [min]="fechaMinima"
+            required>
 
-    <small class="text-muted">
+          <small class="text-muted">
 
-      No se permiten fechas anteriores.
+            No se permiten fechas anteriores.
 
-    </small>
+          </small>
 
-  </div>
+        </div>
 
-  <!-- HORA -->
+        <!-- HORA -->
 
-  <div class="col-md-6 mb-3">
+        <div class="col-md-6 mb-3">
 
-    <label class="form-label fw-bold small">
+          <label class="form-label fw-bold small">
 
-      <i class="fa-solid fa-clock me-2"></i>
+            <i class="fa-solid fa-clock me-2"></i>
 
-      Hora
+            Hora
 
-    </label>
+          </label>
 
-    <select
-      class="form-select-custom"
-      name="hora"
-      [(ngModel)]="reserva.hora"
-      required>
+          <select class="form-select-custom" name="hora" [(ngModel)]="reserva.hora" required>
 
-      <option value="" disabled>
+            <option value="" disabled>
 
-        Seleccione una hora
+              Seleccione una hora
 
-      </option>
+            </option>
 
-      <option
-        *ngFor="let hora of horariosDisponibles"
-        [value]="hora">
+            <option *ngFor="let hora of horariosDisponibles" [value]="hora">
 
-        {{hora}}
+              {{hora}}
 
-      </option>
+            </option>
 
-    </select>
+          </select>
 
-    <small class="text-muted">
+          <small class="text-muted">
 
-      Horario de atención: 08:00 AM - 05:00 PM
+            Horario de atención: 08:00 AM - 04:00 PM
 
-    </small>
+          </small>
 
-  </div>
+        </div>
 
-</div>
+      </div>
 
       <div class="mb-4">
         <label class="form-label fw-bold small">Motivo de Consulta</label>
-        <textarea name="motivoConsulta" class="form-control-custom" rows="3" [(ngModel)]="reserva.motivoConsulta" required></textarea>
+        <textarea name="motivoConsulta" class="form-control-custom" rows="3" [(ngModel)]="reserva.motivoConsulta"
+          required></textarea>
       </div>
 
       <button type="submit" class="btn-premium w-100 py-3 fw-bold">
         <i class="fa-solid fa-calendar-check me-2"></i> Confirmar y Bloquear Horario
       </button>
 
-      <div *ngIf="mensaje" [ngClass]="{'alert-danger': esError, 'alert-success': !esError}" class="alert mt-3 text-center rounded-pill">
+      <div *ngIf="mensaje" [ngClass]="{'alert-danger': esError, 'alert-success': !esError}"
+        class="alert mt-3 text-center rounded-pill">
         {{ mensaje }}
       </div>
     </form>
@@ -142,116 +138,217 @@
         MODAL CONFIRMACIÓN DE CITA
 ======================================================= -->
 
-<div
-    class="modal-overlay"
-    *ngIf="mostrarModal">
+<!-- ==========================================================
+        COMPROBANTE OFICIAL DE RESERVA
+===========================================================-->
 
-    <div class="modal-premium">
+<div class="modal-overlay" *ngIf="mostrarModal">
 
-        <div class="icon-success">
+  <div class="modal-premium">
 
-            <i class="fa-solid fa-circle-check"></i>
+    <div class="header-comprobante">
 
-        </div>
+      <div class="logo-clinica">
 
-        <h2>
+        <i class="fa-solid fa-hospital"></i>
 
-            ¡Cita Reservada!
+      </div>
 
-        </h2>
+      <h2>
 
-        <p class="subtitulo">
+        CLÍNICA SUECIA
 
-            Su cita médica ha sido registrada exitosamente.
+      </h2>
+
+      <span>
+
+        Comprobante Oficial de Reserva
+
+      </span>
+
+    </div>
+
+    <hr>
+
+    <div class="codigo">
+
+      <i class="fa-solid fa-qrcode"></i>
+
+      <strong>{{codigoReserva}}</strong>
+
+    </div>
+
+    <div class="datos-grid">
+
+      <div class="dato">
+
+        <label>
+
+          Paciente
+
+        </label>
+
+        <p>
+
+          {{pacienteConfirmado}}
 
         </p>
 
-        <div class="detalle-cita">
+      </div>
 
-            <div>
+      <div class="dato">
 
-                <i class="fa-solid fa-calendar-days"></i>
+        <label>
 
-                <span>Fecha</span>
+          Médico
 
-                <strong>{{fechaConfirmada}}</strong>
+        </label>
 
-            </div>
+        <p>
 
-            <div>
+          {{medicoConfirmado}}
 
-                <i class="fa-solid fa-clock"></i>
+        </p>
 
-                <span>Hora</span>
+      </div>
 
-                <strong>{{horaConfirmada}}</strong>
+      <div class="dato">
 
-            </div>
+        <label>
 
-            <div>
+          Especialidad
 
-                <i class="fa-solid fa-user-doctor"></i>
+        </label>
 
-                <span>Médico</span>
+        <p>
 
-                <strong>{{medicoConfirmado}}</strong>
+          {{especialidadConfirmada}}
 
-            </div>
+        </p>
 
-        </div>
+      </div>
 
-        <div class="aviso-importante">
+      <div class="dato">
 
-            <h5>
+        <label>
 
-                <i class="fa-solid fa-triangle-exclamation"></i>
+          Consultorio
 
-                Información Importante
+        </label>
 
-            </h5>
+        <p>
 
-            <ul>
+          {{consultorioConfirmado}}
 
-                <li>
+        </p>
 
-                    Llegue <strong>15 minutos antes</strong> de su cita.
+      </div>
 
-                </li>
+      <div class="dato">
 
-                <li>
+        <label>
 
-                    La Clínica Suecia brinda una tolerancia máxima de
-                    <strong>10 minutos.</strong>
+          Fecha
 
-                </li>
+        </label>
 
-                <li>
+        <p>
 
-                    Si excede ese tiempo, el médico podrá dar por finalizada
-                    la atención y será necesario programar una nueva cita.
+          {{fechaFormateada}}
 
-                </li>
+        </p>
 
-                <li>
+      </div>
 
-                    Lleve su DNI y los exámenes médicos si corresponde.
+      <div class="dato">
 
-                </li>
+        <label>
 
-            </ul>
+          Hora
 
-        </div>
+        </label>
 
-        <button
-            class="btn-modal"
-            (click)="cerrarModal()">
+        <p>
 
-            <i class="fa-solid fa-house me-2"></i>
+          {{horaConfirmada}}
 
-            Entendido
+        </p>
 
-        </button>
+      </div>
 
     </div>
+
+    <div class="politicas">
+
+      <h4>
+
+        <i class="fa-solid fa-circle-info me-2"></i>
+
+        Indicaciones Importantes
+
+      </h4>
+
+      <ul>
+
+        <li>
+
+          Presentarse 15 minutos antes de la cita.
+
+        </li>
+
+        <li>
+
+          La Clínica Suecia brinda una tolerancia máxima de
+          <strong>10 minutos.</strong>
+
+        </li>
+
+        <li>
+
+          Después del tiempo de tolerancia el médico podrá
+          dar por finalizada la atención.
+
+        </li>
+
+        <li>
+
+          Lleve su DNI.
+
+        </li>
+
+        <li>
+
+          Si posee exámenes médicos previos,
+          preséntelos al momento de la consulta.
+
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="footer-comprobante">
+
+      <button
+class="btn-descargar"
+(click)="descargarComprobante()">
+
+<i class="fa-solid fa-file-pdf me-2"></i>
+
+Descargar Comprobante
+
+</button>
+
+      <button class="btn-modal" (click)="cerrarModal()">
+
+        <i class="fa-solid fa-house me-2"></i>
+
+        Entendido
+
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
