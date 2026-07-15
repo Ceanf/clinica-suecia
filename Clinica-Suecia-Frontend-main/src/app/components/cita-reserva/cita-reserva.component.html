@@ -137,3 +137,121 @@
     </form>
   </div>
 </div>
+
+<!-- =======================================================
+        MODAL CONFIRMACIÓN DE CITA
+======================================================= -->
+
+<div
+    class="modal-overlay"
+    *ngIf="mostrarModal">
+
+    <div class="modal-premium">
+
+        <div class="icon-success">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+        </div>
+
+        <h2>
+
+            ¡Cita Reservada!
+
+        </h2>
+
+        <p class="subtitulo">
+
+            Su cita médica ha sido registrada exitosamente.
+
+        </p>
+
+        <div class="detalle-cita">
+
+            <div>
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                <span>Fecha</span>
+
+                <strong>{{fechaConfirmada}}</strong>
+
+            </div>
+
+            <div>
+
+                <i class="fa-solid fa-clock"></i>
+
+                <span>Hora</span>
+
+                <strong>{{horaConfirmada}}</strong>
+
+            </div>
+
+            <div>
+
+                <i class="fa-solid fa-user-doctor"></i>
+
+                <span>Médico</span>
+
+                <strong>{{medicoConfirmado}}</strong>
+
+            </div>
+
+        </div>
+
+        <div class="aviso-importante">
+
+            <h5>
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                Información Importante
+
+            </h5>
+
+            <ul>
+
+                <li>
+
+                    Llegue <strong>15 minutos antes</strong> de su cita.
+
+                </li>
+
+                <li>
+
+                    La Clínica Suecia brinda una tolerancia máxima de
+                    <strong>10 minutos.</strong>
+
+                </li>
+
+                <li>
+
+                    Si excede ese tiempo, el médico podrá dar por finalizada
+                    la atención y será necesario programar una nueva cita.
+
+                </li>
+
+                <li>
+
+                    Lleve su DNI y los exámenes médicos si corresponde.
+
+                </li>
+
+            </ul>
+
+        </div>
+
+        <button
+            class="btn-modal"
+            (click)="cerrarModal()">
+
+            <i class="fa-solid fa-house me-2"></i>
+
+            Entendido
+
+        </button>
+
+    </div>
+
+</div>

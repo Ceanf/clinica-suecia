@@ -33,7 +33,17 @@ export class CitaReservaComponent implements OnInit {
 
   mensaje: string = '';
   esError: boolean = false;
-  
+  // ===============================
+// MODAL DE CONFIRMACIÓN
+// ===============================
+
+mostrarModal = false;
+
+fechaConfirmada = '';
+
+horaConfirmada = '';
+
+medicoConfirmado = '';
   // 🚨 MULTI-ROL: Variables para saber si ocultamos el select de pacientes
   esPacienteLogueado: boolean = false;
   nombrePacienteFijo: string = '';
@@ -63,9 +73,7 @@ horariosDisponibles: string[] = [
   "14:30",
   "15:00",
   "15:30",
-  "16:00",
-  "16:30",
-  "17:00"
+  "16:00"
 ];
 
   constructor(
@@ -154,20 +162,19 @@ horariosDisponibles: string[] = [
 
   const dia = fechaSeleccionada.getDay();
 
-  // ===================================
-  // NO SÁBADOS NI DOMINGOS
-  // ===================================
+  
+// Domingo = 0
 
-  if (dia === 0 || dia === 6) {
+if (dia === 0) {
 
     this.mensaje =
-      "La Clínica Suecia atiende únicamente de lunes a viernes.";
+      "La Clínica Suecia atiende de lunes a sábado. Los domingos no hay atención.";
 
     this.esError = true;
 
     return;
 
-  }
+}
 
   // ===================================
   // SI ES HOY, VALIDAR HORA
@@ -213,22 +220,22 @@ horariosDisponibles: string[] = [
 
   if (
 
-      hora < 8 ||
+    hora < 8 ||
 
-      hora > 17 ||
+    hora > 16 ||
 
-      (hora === 17 && minuto > 0)
+    (hora === 16 && minuto > 0)
 
-  ) {
+) {
 
-      this.mensaje =
-        "La Clínica Suecia atiende únicamente entre las 08:00 AM y las 05:00 PM.";
+    this.mensaje =
+      "La Clínica Suecia atiende únicamente entre las 08:00 AM y las 04:00 PM.";
 
-      this.esError = true;
+    this.esError = true;
 
-      return;
+    return;
 
-  }
+}
 
   // ===================================
   // FORMATEAR FECHA
@@ -257,20 +264,25 @@ horariosDisponibles: string[] = [
 
   this.citaService.agendarCita(paqueteFinal).subscribe({
 
-    next: () => {
+   next: () => {
 
-      this.mensaje =
-        "¡Cita reservada correctamente!";
+  this.esError = false;
 
-      this.esError = false;
+  this.fechaConfirmada = this.reserva.fecha;
 
-      setTimeout(() => {
+  this.horaConfirmada = this.reserva.hora;
 
-        this.router.navigate(['/']);
+  const medico = this.todosLosMedicos.find(
+    m => m.medicoId === this.reserva.medicoId
+  );
 
-      }, 2500);
+  this.medicoConfirmado = medico
+      ? `Dr(a). ${medico.nombre} ${medico.apellido}`
+      : "Médico asignado";
 
-    },
+  this.mostrarModal = true;
+
+},
 
     error: (err) => {
 
@@ -282,6 +294,15 @@ horariosDisponibles: string[] = [
     }
 
   });
+
+}
+
+
+cerrarModal(){
+
+    this.mostrarModal = false;
+
+    this.router.navigate(['/']);
 
 }
 }
