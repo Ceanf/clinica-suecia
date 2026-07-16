@@ -21,43 +21,22 @@ export class NavbarComponent {
     return localStorage.getItem('username') || '';
   }
 
-  // Traducción del ID del rol
+  // 🚨 TRADUCTOR DE ROLES: Convierte el ID numérico al nombre del rol
   getRol(): string {
-
     const rolId = localStorage.getItem('rol');
-
+    
     if (rolId === '1') return 'ADMIN';
-
     if (rolId === '2') return 'MEDICO';
-
     if (rolId === '3') return 'PACIENTE';
-
-    return '';
-
+    
+    return ''; // Si no hay rol, retorna vacío
   }
-
-  esPaginaPublica(): boolean {
-
-  console.log("Ruta actual:", this.router.url);
-
-  return (
-    this.router.url === '/' ||
-    this.router.url === '/login' ||
-    this.router.url === '/registro-paciente'
-  );
-
-}
 
   logout() {
-
     localStorage.removeItem('token');
-
     localStorage.removeItem('username');
-
     localStorage.removeItem('rol');
-
+    
     this.router.navigate(['/login']);
-
   }
-
 }

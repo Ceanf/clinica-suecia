@@ -20,14 +20,7 @@ const routes: Routes = [
 
   // EL REGISTRO DE PACIENTES ES PÚBLICO (No lleva canActivate)
   { path: 'registro-paciente', component: RegistroPacienteComponent },
-  { path: 'mi-historial', component: HistorialPacienteComponent },{
-  path: 'mi-historial',
-  component: HistorialPacienteComponent,
-  canActivate: [AdminGuard],
-  data: {
-    rolesPermitidos: ['PACIENTE']
-  }
-},
+  { path: 'mi-historial', component: HistorialPacienteComponent },
 
   // RUTA EXCLUSIVA DEL ADMINISTRADOR (Rol 1)
   { path: 'registro-medico', component: RegistroMedicoComponent, canActivate: [AdminGuard], data: { rolesPermitidos: ['ADMIN'] }},

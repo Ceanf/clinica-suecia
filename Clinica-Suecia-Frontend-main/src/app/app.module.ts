@@ -25,7 +25,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HomeComponent } from './components/home/home.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +42,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     AgendaMedicoComponent,
     HistorialPacienteComponent,
     DashboardComponent,
-    HomeComponent,
-    SidebarComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
