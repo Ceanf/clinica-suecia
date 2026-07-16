@@ -783,26 +783,23 @@ descargarComprobante() {
 
 cerrarModal() {
 
-    this.mostrarModal = false;
+  this.mostrarModal = false;
 
-    const rol = Number(localStorage.getItem('rol'));
+  const rol = localStorage.getItem('rol');
 
-    if (rol === 3) {
+  if (rol === '3') {
 
-        // Paciente
-        this.router.navigate(['/mi-historial']);
+    this.router.navigate(['/mi-historial']);
 
-    } else if (rol === 2) {
+  } else if (rol === '2') {
 
-        // Médico
-        this.router.navigate(['/agenda-medico']);
+    this.router.navigate(['/agenda-medico']);
 
-    } else {
+  } else {
 
-        // Administrador
-        this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard']);
 
-    }
+  }
 
 }
 }
